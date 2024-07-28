@@ -1,3 +1,4 @@
+import java.util.PriorityQueue;
 import java.util.stream.IntStream;
 
 public class Dijkastra {
@@ -12,7 +13,7 @@ public class Dijkastra {
         };
         Dijkastra dijkastra = new Dijkastra();
 
-        int[] dist = dijkastra.dijkastra(graph, source);
+        int[] dist = dijkastra.dijkstraPQ(graph, source);
         for (int i = 0; i < dist.length; i++) {
             System.out.println(source + " to " + i + " = " + dist[i]);
         }
@@ -71,4 +72,44 @@ public class Dijkastra {
         } while (true);
         return dist;
     }
+
+    public int[] dijkstraPQ(int[][] graph, int source) {
+        // dist array
+        int[] dist = IntStream.generate(() -> Integer.MAX_VALUE)
+                .limit(graph.length)
+                .toArray();
+        dist[source] = 0;
+        // put source vertice in priority queue
+        PriorityQueue<Pair<Integer, Integer>> heap = new PriorityQueue<>((a, b) -> {
+            return b.value - a.value;
+        });
+        heap.add(new Pair<>(source, 0));
+
+        while (!heap.isEmpty()) {
+            Pair<Integer, Integer> vertUPair = heap.poll();
+            Integer vertU = vertUPair.key;
+            Integer weightU = vertUPair.value;
+            for (int vertV = 0; vertV < graph[vertU].length; vertV++) {
+
+                if (graph[vertU][vertV] != 0 && // edge present
+                        dist[vertV] > graph[vertU][vertV] + weightU) {
+                            dist[vertV] = graph[vertU][vertV] + weightU  ;
+                            heap.add(new Pair<>(vertV, dist[vertV]));
+
+                }
+            }
+        }
+        return dist;
+    }
+
+    static class Pair<K, V> {
+        public K key;
+        public V value;
+
+        public Pair(K key, V value) {
+            this.key = key;
+            this.value = value;
+        }
+    }
+
 }
