@@ -3,7 +3,7 @@ import java.util.stream.IntStream;
 
 public class Dijkastra {
     public static void main(String[] args) {
-        int source = 0;
+        int source = 4;
         int[][] graph = {
                 { 0, 3, 0, 0, 0 },
                 { 3, 0, 1, 4, 0 },
