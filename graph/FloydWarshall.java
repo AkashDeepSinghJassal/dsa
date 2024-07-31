@@ -7,7 +7,6 @@
  */
 public class FloydWarshall {
     public static void main(String[] args) {
-        int source = 0;
         int[][] graph = {
                 { 0, 3, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE },
                 { 3, 0, 1, 4, Integer.MAX_VALUE },
