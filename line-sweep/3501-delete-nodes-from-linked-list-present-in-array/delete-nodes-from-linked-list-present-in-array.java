@@ -25,9 +25,9 @@ class Solution {
         while(initNode.next != null) {
             if(set.contains(initNode.next.val)) {
                 initNode.next = initNode.next.next;
-                continue;
+            } else {
+                initNode = initNode.next;
             }
-            initNode = initNode.next;
         }
         return newHead.next;
     }
