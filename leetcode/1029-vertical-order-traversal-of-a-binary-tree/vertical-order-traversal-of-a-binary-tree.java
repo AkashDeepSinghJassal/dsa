@@ -54,7 +54,6 @@ class Solution {
             List<Integer> vertList = new ArrayList<>();
             for(int j = 0; j < SIZE / 2; j++) {
                 if(index[i][j] != null) {
-                    System.out.println("vert list" + vertList + " index["+ i +"]["+ j +"]" + index[i][j]);
                     index[i][j].sort(Comparator.naturalOrder());
                     vertList.addAll(index[i][j]);
                 }
