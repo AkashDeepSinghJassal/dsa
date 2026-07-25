@@ -28,9 +28,8 @@ class Solution {
                 if(temp == null) {
                     // keep poping from right backtrack
                     while(!st.isEmpty() && st.peek().right == temp) {
-                        TreeNode popNode = st.pop();
-                        list.add(popNode.val);
-                        temp = popNode;
+                        temp = st.pop();
+                        list.add(temp.val);
                     }
                 }
                 // push right tree
