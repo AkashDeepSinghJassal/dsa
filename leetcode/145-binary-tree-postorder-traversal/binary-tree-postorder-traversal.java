@@ -33,8 +33,10 @@ class Solution {
                     }
                 }
                 // push right tree
+                if(!st.isEmpty())
+                    curr = st.peek().right;
                 else 
-                    curr = temp;
+                    curr = null;
             }
         }
         return list;
