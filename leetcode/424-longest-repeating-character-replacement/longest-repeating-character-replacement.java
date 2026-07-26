@@ -16,7 +16,6 @@ class Solution {
             while(l <= r && (r - l + 1) - maxFreq > k) {
                 hash[s.charAt(l) - 'A']--;
                 l++;
-                maxFreq = findMaxFreq(hash);
             }
             // find max Freq
             maxLen = Math.max(maxLen, r - l + 1);
