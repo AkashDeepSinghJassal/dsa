@@ -10,33 +10,29 @@
 class Solution {
 
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        List<TreeNode> pList = new ArrayList<>();
-        List<TreeNode> qList = new ArrayList<>();
-        path(root, p, pList);
-        path(root, q, qList);
-        int i = 0, j = 0;
-        int result = -1;
-        while(i < pList.size() && j < qList.size() && pList.get(i).val == qList.get(j).val) {
-            i++;
-            j++;
-        }
-        return pList.get(i - 1);
+        // if root is null
+
+        // if root is equal to p or q return it
+
+        // traverse left and right
+        // if both return non null value return root
+       if(root == null) {
+        return null;
+       }
+       if(root == p || root == q) {
+            return root;
+       }
+       TreeNode left = lowestCommonAncestor(root.left, p, q);
+       TreeNode right = lowestCommonAncestor(root.right, p, q);
+       if(left != null && right != null) {
+        return root;
+       } else if (left != null) {
+        return left;
+       } else if (right != null) {
+        return right;
+       } else {
+        return null;
+       }
     }
 
-    public boolean path(TreeNode root, TreeNode node, List<TreeNode> list ) {
-        if(root == null) {
-            return false;
-        }
-        list.add(root);
-        if(root.val == node.val) {
-            return true;
-        }
-
-        if(path(root.left, node, list) || path(root.right, node, list)) {
-            return true;
-        }
-        // remove value and backtract
-        list.remove(list.size() - 1);
-        return false;
-    }
 }
