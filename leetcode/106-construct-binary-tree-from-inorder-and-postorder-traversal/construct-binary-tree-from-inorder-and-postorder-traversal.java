@@ -38,7 +38,6 @@ class Solution {
                 break;
             }
         }
-        System.out.println("index : " + idx + " at i : " + i + " j :  " + j + " root val " + currRootVal + " m : " + m + " n : " + n);
         int shift = j - idx + 1;
         // build left sub tree
         // build right sub tree
