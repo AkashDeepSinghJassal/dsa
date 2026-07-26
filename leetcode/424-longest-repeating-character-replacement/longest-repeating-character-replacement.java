@@ -13,7 +13,7 @@ class Solution {
             char c = s.charAt(r);
             hash[c - 'A']++;
             maxFreq = Math.max(maxFreq, hash[c - 'A']);
-            if(l <= r && (r - l + 1) - maxFreq > k) {
+            while(l <= r && (r - l + 1) - maxFreq > k) {
                 hash[s.charAt(l) - 'A']--;
                 l++;
             }
