@@ -14,10 +14,14 @@
  * }
  */
 class Solution {
+    Map<Integer, Integer> map = new HashMap<>();
     public TreeNode buildTree(int[] inorder, int[] postorder) {
         // build root
         int i = 0;
         int j = inorder.length - 1;
+        for(int a = 0; a < inorder.length; a++) {
+            map.put(inorder[a], a);
+        }
         return build(inorder, postorder, i, j, i, j);
     }
 
@@ -31,13 +35,15 @@ class Solution {
             return root;
         }
         // find index of curr root in inorder
-        int idx = -1;
-        for(int a = i; a <= j; a++) {
-            if(inorder[a] == currRootVal) {
-                idx = a;
-                break;
-            }
-        }
+        // int idx = -1;
+        // for(int a = i; a <= j; a++) {
+        //     if(inorder[a] == currRootVal) {
+        //         idx = a;
+        //         break;
+        //     }
+        // }
+        // use map
+        int idx = map.get(currRootVal);
         int shift = j - idx + 1;
         // build left sub tree
         // build right sub tree
