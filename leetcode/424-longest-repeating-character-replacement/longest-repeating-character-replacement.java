@@ -15,7 +15,6 @@ class Solution {
             maxFreq = Math.max(maxFreq, hash[c - 'A']);
             while(l <= r && (r - l + 1) - maxFreq > k) {
                 hash[s.charAt(l) - 'A']--;
-                System.out.println("hash at l " + s.charAt(l)  + " r " + s.charAt(r) + " is " + hash[s.charAt(l) - 'A'] + " and max freq");
                 l++;
                 maxFreq = findMaxFreq(hash);
             }
