@@ -13,9 +13,8 @@ class Solution {
         int sum = 0;
         while(r < nums.length) {
             count += nums[r];
-            System.out.println(" r " + r + " num r " + nums[r]);
             while(count > goal) {
-                System.out.println("count " + count + " nums l : " + l + "  " + nums[l] );
+               
                 count -= nums[l];
                 l++;
             
