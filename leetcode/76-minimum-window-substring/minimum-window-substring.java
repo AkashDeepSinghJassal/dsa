@@ -47,8 +47,9 @@ class Solution {
                     }
                 }
             }   
+            if(mapS.get(s.charAt(r)) >= mapT.get(s.charAt(r))) {
                 if (validateMap(mapS, mapT)) {
-                    // System.out.println(" in validate");
+                    // System.out.println(" in validate");/z
                     if(min > (r - l + 1)) {
                         min = r - l + 1;
                         res = s.substring(l, r + 1);
@@ -56,7 +57,7 @@ class Solution {
 
                 }
 
-            
+            } 
             r++;
         }
         return res;
