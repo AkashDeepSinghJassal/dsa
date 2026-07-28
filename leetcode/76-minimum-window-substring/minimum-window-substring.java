@@ -1,78 +1,42 @@
 class Solution {
     public String minWindow(String s, String t) {
-        /**
-            example 
-            "BJKQUUABCCBNAMUUCC"
-         */
-        String res = "";
-        Map<Character, Integer> mapT = new HashMap<>();
-        Map<Character, Integer> mapS = new HashMap<>();
-        // set freq of str t
-        for(char c : t.toCharArray()) {
-            mapT.put(c, mapT.getOrDefault(c, 0) + 1);
-        }
-
-        /**
-            find window size that contain all character of t
-            check with the min length
-
-            if freq of char of str s is < char of str t 
-                continue
-            if same 
-                then validate both map
-            else high 
-                try to remove from left until any char of t is found
-                    if same char is found keep removing until diff char is found
-         */
+        // store count of found char
+        int tSum = t.length();
+        char[] sArr = s.toCharArray();
+        int count = 0;
+        int[] hash = new int[256];
         int l, r;
+        int li, ri;
+        li = ri = -1;
+        int minLen = Integer.MAX_VALUE;
         l = r = 0;
-        int min = Integer.MAX_VALUE;
-        while (r < s.length()) {
-            if(mapT.containsKey(s.charAt(r))) {
-                mapS.put(s.charAt(r), mapS.getOrDefault(s.charAt(r), 0) + 1);
-            } else {
-                r++;
-                continue;
+        for(char c : t.toCharArray()) {
+            hash[c]++;
+        }
+        // increment r 
+        // check if hash[s[r]] > 0 for given s[r] then decrease 1 from hash[s[r]];
+        while(r < sArr.length) {
+            if(hash[sArr[r]] > 0) {
+                count++;
             }
-            // System.out.println(r + " val " + s.charAt(r)+ " at " + mapS);
-            if (mapS.get(s.charAt(r)) >= mapT.get(s.charAt(r))) {
-                while(true) {
-                    if (!mapT.containsKey(s.charAt(l))) {
-                        l++;
-                    } else if(mapS.get(s.charAt(l)) > mapT.get(s.charAt(l))  ) { // only remove if freq of c in mapS > freq of c in map T
-                        mapS.put(s.charAt(l), mapS.get(s.charAt(l)) - 1);
-                        l++;
-                    } else {
-                        break;
-                    }
+            hash[sArr[r]]--;
+        // if count == tSum
+            if(count == tSum) {
+        // try to reduce window
+                while(hash[sArr[l]] < 0) {
+                    hash[sArr[l]]++;
+                    l++;
                 }
-            }   
-            if(mapS.get(s.charAt(r)) >= mapT.get(s.charAt(r))) {
-                if (validateMap(mapS, mapT)) {
-                    // System.out.println(" in validate");/z
-                    if(min > (r - l + 1)) {
-                        min = r - l + 1;
-                        res = s.substring(l, r + 1);
-                    }
-
+                if(minLen > r - l + 1) {
+                    minLen = r - l + 1;
+                    li = l;
+                    ri = r;
                 }
-
-            } 
+            }
             r++;
         }
-        return res;
-    }
-    boolean validateMap(Map<Character, Integer> mapS, Map<Character, Integer> mapT) {
-        if(mapS.size() != mapT.size()) {
-            return false;
-        }
-        for(Map.Entry<Character, Integer> sEntry : mapS.entrySet()) {
-            char sKey = sEntry.getKey();
-            int sVal = sEntry.getValue();
-            if(sVal < mapT.get(sKey)) {
-                return false;
-            }
-        }
-        return true;
+        if(li == -1)
+            return "";
+        return s.substring(li, ri + 1);
     }
 }
