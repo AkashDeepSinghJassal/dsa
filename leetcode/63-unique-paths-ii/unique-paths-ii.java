@@ -19,7 +19,6 @@ class Solution {
             dp[i][0] = 1;
         }
         int i;
-        System.out.println(Arrays.deepToString(dp));
         for(i = 1; i < m; i++) {
             for(int j = 0; j < n; j++) {
                 // adjust condition
@@ -34,7 +33,6 @@ class Solution {
                      
                 }
             }
-            System.out.println("when i " + i + " " + Arrays.deepToString(dp));
         }
         return dp[(i - 1) % 2][n - 1];
     }
