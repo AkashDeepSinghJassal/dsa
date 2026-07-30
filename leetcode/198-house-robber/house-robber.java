@@ -1,16 +1,16 @@
 class Solution {
     public int rob(int[] nums) {
-        int[] dp = new int[nums.length];
-        int sum = 0;
-        for(int i = 0; i < nums.length; i++) {
-
-            dp[i] = nums[i];
-            for(int j = i - 2; j >= 0; j--) {
-                dp[i] = Math.max(dp[i], dp[j] + nums[i]);
-                
-            }
-            sum = Math.max(sum, dp[i]);
+        if(nums.length == 1) {
+            return nums[0];
         }
-        return sum;
+        int[] dp = new int[nums.length + 1];
+        // base case
+        dp[0] = 0;
+        dp[1] = nums[0];
+        for(int i = 1; i < nums.length; i++) {
+            dp[i + 1] = Math.max(dp[i - 1] + nums[i], dp[i]);
+            
+        }
+        return dp[nums.length];
     }
 }
