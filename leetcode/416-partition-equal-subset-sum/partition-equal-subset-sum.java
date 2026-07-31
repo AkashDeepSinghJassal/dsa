@@ -23,9 +23,9 @@ class Solution {
                 if(j - nums[i] >= 0)
                     dp[i%2][j] = dp[(i - 1) % 2][j - nums[i]];
                 dp[i % 2][j] = dp[i % 2][j] || dp[(i -1) % 2][j];
+            }
                 if(dp[i % 2][sum])
                     return true;
-            }
         }
         return dp[(i - 1) % 2][sum];
     }
