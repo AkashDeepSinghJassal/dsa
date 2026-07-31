@@ -7,7 +7,6 @@ class Solution {
         if(sum % 2 == 1) {
             return false;
         }
-        sum = sum/2;
         boolean[][] dp = new boolean[2][sum + 1];
         for(int i = 0; i < 2; i++) {
             dp[i][0] = true;
@@ -18,15 +17,15 @@ class Solution {
         // currSum + remainingSum = total
         // if currSum =0 condition true always remSum == total
         int i;
+        dp[0][nums[0]] = true; 
+        
         for(i = 1; i < nums.length; i++) {
             for(int j = 1; j <= sum; j++) {
                 if(j - nums[i] >= 0)
                     dp[i%2][j] = dp[(i - 1) % 2][j - nums[i]];
                 dp[i % 2][j] = dp[i % 2][j] || dp[(i -1) % 2][j];
             }
-                if(dp[i % 2][sum])
-                    return true;
         }
-        return dp[(i - 1) % 2][sum];
+        return dp[(i - 1) % 2][sum/2];
     }
 }
