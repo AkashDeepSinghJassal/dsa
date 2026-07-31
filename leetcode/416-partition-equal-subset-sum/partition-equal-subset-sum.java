@@ -8,8 +8,8 @@ class Solution {
             return false;
         }
         sum = sum/2;
-        boolean[][] dp = new boolean[nums.length][sum + 1];
-        for(int i = 0; i < nums.length; i++) {
+        boolean[][] dp = new boolean[2][sum + 1];
+        for(int i = 0; i < 2; i++) {
             dp[i][0] = true;
         }
         // initialize memoization
@@ -21,10 +21,10 @@ class Solution {
         for(i = 1; i < nums.length; i++) {
             for(int j = 1; j <= sum; j++) {
                 if(j - nums[i] >= 0)
-                    dp[i][j] = dp[i - 1][j - nums[i]];
-                dp[i][j] = dp[i][j] || dp[i - 1][j];
+                    dp[i%2][j] = dp[(i - 1) % 2][j - nums[i]];
+                dp[i % 2][j] = dp[i % 2][j] || dp[(i -1) % 2][j];
             }
         }
-        return dp[i - 1][sum];
+        return dp[(i - 1) % 2][sum];
     }
 }
