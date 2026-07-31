@@ -41,13 +41,12 @@ class Solution {
         if(pos > k || (pos % 2) != (k % 2)) {
             return 0;
         }
-        int[][] arr = new int[k + 1][2];
+        int[][] arr = new int[k + 2][2];
         arr[0][0] = 1;
         int i;
         for(i = 1; i <= k; i++) {
             for(int j = 0; j <= i; j++) {
                 arr[j][i % 2] = 0;
-                if (j +1 <= k)
                     arr[j][i % 2] += arr[j + 1][(i - 1) % 2];
 
                 arr[j][i % 2] += arr[Math.abs(j - 1)][(i - 1) % 2];
