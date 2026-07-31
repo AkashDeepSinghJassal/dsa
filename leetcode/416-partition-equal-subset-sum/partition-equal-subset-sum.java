@@ -17,6 +17,9 @@ class Solution {
         // currSum + remainingSum = total
         // if currSum =0 condition true always remSum == total
         int i;
+        sum = sum/2;
+        if(nums[0] > sum )
+            return false;
         dp[0][nums[0]] = true; 
         
         for(i = 1; i < nums.length; i++) {
@@ -26,6 +29,6 @@ class Solution {
                 dp[i % 2][j] = dp[i % 2][j] || dp[(i -1) % 2][j];
             }
         }
-        return dp[(i - 1) % 2][sum/2];
+        return dp[(i - 1) % 2][sum];
     }
 }
