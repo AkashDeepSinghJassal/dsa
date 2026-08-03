@@ -10,7 +10,7 @@ class Solution {
     
     */
     public boolean stoneGame(int[] piles) {
-        return true;
+        // return true;
         // int total = 0;
         // for(int i = 0; i < piles.length; i++) {
         //     total += piles[i];
@@ -19,19 +19,22 @@ class Solution {
         // int sum = stone(piles, 0, piles.length -  1, 0, dp);
         // System.out.println("max sum allice " + dp[0][piles.length -1][0]);
         // return sum > (total - sum);
+        int dp[][] = new int[piles.length][piles.length];
+        int adv = stone(piles, 0, piles.length -  1, dp);
+        return adv > 0;
     }
 
-    public int stone(int[] nums, int i, int j, int turn, int dp[][][]) {
-        if(dp[i][j][turn] != 0) {
-            return dp[i][j][turn];
+    public int stone(int[] nums, int i, int j, int dp[][]) {
+        if(i == j) {
+            return nums[i];
         }
-        if(j - i == 1) {
-            dp[i][j][turn] = nums[i] > nums[j] ? nums[i] : nums[j];
-            return dp[i][j][turn];
-        }
-        
-        dp[i][j][turn] =  Math.max(nums[i] + stone(nums, i + 1, j, (turn + 1) % 2, dp),  nums[j] + stone(nums, i , j - 1, (turn + 1) % 2, dp));
-        return dp[i][j][turn];
+        if(dp[i][j] != 0)
+            return dp[i][j];
+        // find advantage
+        int left = nums[i] - stone(nums, i + 1, j, dp);
+        int right = nums[j] - stone(nums, i, j - 1, dp);
+        dp[i][j] = Math.max(left, right);
+        return dp[i][j];
         
     }
 }
