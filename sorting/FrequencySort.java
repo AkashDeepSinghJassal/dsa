@@ -14,7 +14,7 @@ public class FrequencySort {
          * traverse main array
          * like n = 5, freq = 1
          */
-        int[] nums = {1,1,2,2,2,-3,4,5};
+        int[] nums = {4, 1, 1,4,2,2,2,-3,5};
         FrequencySort frequencySort = new FrequencySort();
         int result[] = frequencySort.frequencySort(nums);
         Arrays.stream(result).forEach(s -> System.out.print(s + " "));
