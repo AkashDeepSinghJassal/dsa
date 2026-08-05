@@ -47,9 +47,7 @@ class Solution {
                 if(newA < 0 || newA >= m || newB < 0 || newB >= n) {
                     continue;
                 }
-                System.out.println("new A " + newA + " newB " + newB + " val " + board[newA][newB]);
                 if(board[newA][newB] == 'O' && (newA == 0 || newA == m - 1 || newB == 0 || newB == n - 1)) {
-                    System.out.println(" is valid false");
                     isValid = false;
                 }
                 if(board[newA][newB] == 'O' && visited[newA][newB] == 0) {
