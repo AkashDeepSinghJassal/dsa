@@ -16,7 +16,6 @@ class Solution {
         boolean[] sus = new boolean[n];
         // find sus
         check(k, graph, sus, inOrder);
-        System.out.println("inorder " + Arrays.toString(inOrder));
         boolean isSus = true;
         for(int i = 0; i < n; i++) {
             if(sus[i] && inOrder[i] > 0) {
@@ -24,7 +23,6 @@ class Solution {
                 break;
             }
         }
-        System.out.println("is sus" + isSus + " sus " + Arrays.toString(sus));
         List<Integer> res = new ArrayList<>();
         for(int i = 0; i < n; i++) {
             if(!isSus || !sus[i]) {
